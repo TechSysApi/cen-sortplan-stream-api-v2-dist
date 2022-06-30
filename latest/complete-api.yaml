@@ -5,7 +5,7 @@ info:
   contact:
     name: 'Kay Herzam (Swiss Post)'
     email: kay.herzam@post.ch
-  version: 3.0.0
+  version: 3.0.1
 host: 'server:8080'
 basePath: mqtt
 paths:
@@ -30,7 +30,7 @@ paths:
           default: '01'
       responses:
         default:
-          schema: {$ref: '#/definitions/OutletGroupLabels'}
+          schema: {$ref: 'OutletGroupLabels'}
   'cen-sortplan/v1/control/outlet-table/{srcSystem}/{srcInstance}':
     post:
       summary: '🔂[RETAINED] ATG-2 Distribute and activate outlet table (Zieltabelle verteilen und aktivieren )'
@@ -52,7 +52,7 @@ paths:
           default: '01'
       responses:
         default:
-          schema: {$ref: '#/definitions/OutletTable'}
+          schema: {$ref: 'OutletTable'}
   'cen-sortplan/v1/control/special-sort-table/{srcSystem}/{srcInstance}':
     post:
       summary: '🔂[RETAINED] ATG-2 Distribute and activate outlet table (SPECIALVZ verteilen und aktivieren )'
@@ -74,7 +74,7 @@ paths:
           default: '01'
       responses:
         default:
-          schema: {$ref: '#/definitions/SpecialSortTable'}
+          schema: {$ref: 'SpecialSortTable'}
 definitions:
   Action:
     type: object
@@ -84,11 +84,11 @@ definitions:
       sorts:
         type: array
         items:
-          $ref: '#/definitions/Sort'
+          $ref: 'Sort'
       prints:
         type: array
         items:
-          $ref: '#/definitions/Print'
+          $ref: 'Print'
     additionalProperties: false
     description: 'Maps a product to an action.'
   LocationType:
@@ -122,7 +122,7 @@ definitions:
       actions:
         type: array
         items:
-          $ref: '#/definitions/Action'
+          $ref: 'Action'
         minItems: 1
     required:
       - timestamp
@@ -141,12 +141,12 @@ definitions:
         description: "Tray number. Feld nur relevant, wenn mehrere Sorter eingesetzt werden.\nNummer vom Sorter. Feld nur relevant, wenn mehrere Sorter eingesetzt werden."
         minimum: 1
       specialType:
-        $ref: '#/definitions/OutletArea'
+        $ref: 'OutletArea'
         description: 'Defines the usage made of the outlet group.'
       outlets:
         type: array
         items:
-          $ref: '#/definitions/Outlet'
+          $ref: 'Outlet'
         description: 'The list of physical outlets to be used.'
         minItems: 1
         maxItems: 6
@@ -169,7 +169,7 @@ definitions:
       outletGroups:
         type: array
         items:
-          $ref: '#/definitions/OutletGroup'
+          $ref: 'OutletGroup'
     required:
       - timestamp
       - name
@@ -194,7 +194,7 @@ definitions:
     type: object
     properties:
       location:
-        $ref: '#/definitions/LocationType'
+        $ref: 'LocationType'
         description: "Specifies the print Location i.e. where action is performed. Typical locations\nare Label-Printer or Display."
       format:
         type: string
@@ -257,7 +257,7 @@ definitions:
       specialSorts:
         type: array
         items:
-          $ref: '#/definitions/SpecialSort'
+          $ref: 'SpecialSort'
         description: 'Special logistics and technical destinations. Typical examples are “REJECT” or “OVERFLOW”.'
     required:
       - name
@@ -277,12 +277,12 @@ definitions:
       sortingProducts:
         type: array
         items:
-          $ref: '#/definitions/SortingProduct'
+          $ref: 'SortingProduct'
         minItems: 1
       actions:
         type: array
         items:
-          $ref: '#/definitions/Action'
+          $ref: 'Action'
         minItems: 1
     required:
       - timestamp
@@ -294,7 +294,7 @@ definitions:
     type: object
     properties:
       name:
-        $ref: '#/definitions/SortReason'
+        $ref: 'SortReason'
         description: 'The name of the special sort.'
     required:
       - name
